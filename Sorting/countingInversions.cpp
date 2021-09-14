@@ -30,8 +30,7 @@ long long merge(int arr[], int l,int mid,int r){
             arr[k] = a[i];
             i++;k++;
         }
-        while (j<n2)
-        {
+        while (j<n2){
             arr[k] = b[j];
             j++;k++;
         }

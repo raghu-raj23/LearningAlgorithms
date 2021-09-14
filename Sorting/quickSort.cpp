@@ -34,7 +34,7 @@ int main()
     for(int i=0; i<n; i++){
         cin>>arr[i];
     }
-    solve(arr,0,4);
+    solve(arr,0,n-1);
     for(int i=0; i<n; i++){
         cout<<arr[i]<<" ";
     }

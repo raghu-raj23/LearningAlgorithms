@@ -8,9 +8,6 @@ previous common difference to compare with current difference
 current arithmetic subarray lengths
 max arrithmetic length
 
-
-
-
 */
 
 

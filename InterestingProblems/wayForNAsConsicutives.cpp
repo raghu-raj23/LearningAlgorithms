@@ -19,7 +19,6 @@ int main()
 {
     int n;
     cin>>n;
-    cout<<"hi";
     cout<<solve(n);
     return 0;
 }
