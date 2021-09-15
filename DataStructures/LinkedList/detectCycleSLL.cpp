@@ -35,59 +35,49 @@ void insertAtTail(Node* &head, int val){
     return;
 }
 
-// Deletion
 
-void deleteAtHead(Node* &head){
-    if(head == NULL){
-        return;
-    }
-    Node* toDelete = head;
-    head = head->next;
-    delete toDelete;
-}
-
-void deleteAtEnd(Node* &head, int val){
-    if(head = NULL){
-        return;
-    }
-    if(head->next == NULL){
-        deleteAtHead(head);
-        return;
-    }
+void makecycle(Node* &head, int pos){
     Node* temp = head;
-    while(temp->next != NULL){
-        temp= temp->next;
-    }
-    temp->next = NULL;
-    return;
-}
-
-void deleteAtLoc(Node* &head, int val){
-    if(head = NULL){
-        return;
-    }
-    if(head->next == NULL){
-        deleteAtHead(head);
-    } 
-    Node* temp = head;
-    while(temp->next->data != val){
-        temp= temp->next;
-    }
-    Node* toDelete = temp->next;
-    temp->next = temp->next->next;
-    delete toDelete;
-    return;
-}
-
-bool search(Node* head, int key){
-    Node* temp = head;
-    while(temp != NULL){
-        if(temp->data == key){
-            return true;
+    Node* startNode;
+    int count = 1;
+    while(temp->next!= NULL){
+        if(count == pos){
+            startNode = temp;
         }
         temp = temp->next;
+        count++;
+    }
+    temp->next = startNode;
+}
+
+//  Detecting loops in linked list
+
+bool detectLoop(Node* head){
+    Node* slowPtr = head;
+    Node* fastPtr = head;
+    while(fastPtr!= NULL and fastPtr->next != NULL){
+        slowPtr = slowPtr->next;
+        fastPtr = fastPtr->next->next;
+        if(fastPtr==slowPtr){
+            return true;
+        }
     }
     return false;
+}
+
+void removeLoop(Node* &head){
+    Node* slowPtr = head;
+    Node* fastPtr = head;
+    do{
+        slowPtr = slowPtr->next;
+        fastPtr = fastPtr->next->next;
+    }while(fastPtr != slowPtr);
+    fastPtr = head;
+    while(fastPtr->next != slowPtr->next){
+        slowPtr = slowPtr->next;
+        fastPtr = fastPtr->next;
+    }
+    slowPtr->next = NULL;
 }
 
 void display(Node* head){
@@ -107,10 +97,13 @@ int main(){
     insertAtTail(head,4);
     insertAtHead(head,5);
     display(head);
-    cout<<search(head, 7);
-    cout<<search(head, 3)<<endl;
-    deleteAtHead(head);
-    display(head);
 
+    makecycle(head, 2);
+    cout<<detectLoop(head)<<endl;
+
+    removeLoop(head);
+    cout<<detectLoop(head)<<endl;
+    
+    display(head);
     return 0;
 }
