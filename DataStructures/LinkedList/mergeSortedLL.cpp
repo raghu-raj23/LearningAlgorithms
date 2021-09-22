@@ -73,19 +73,41 @@ Node* merge(Node* &head1, Node* &head2){
     return dummy->next;
 }
 
+Node* mergeRec(Node* &head1, Node* &head2){
+    if(head1 == NULL){
+        return head2;
+    }
+    if(head2 == NULL){
+        return head1;
+    }
+    Node* result;
+    if(head1->data<head2->data){
+        result = head1;
+        result->next =  mergeRec(head1->next, head2);
+    }
+    else{
+        result = head2;
+        result->next = mergeRec(head1, head2->next);
+    }
+    return result;
+}
+
 int main(){
     Node* head = NULL;
     Node* head2 = NULL;
     insertAtTail(head,1);
-    insertAtTail(head,2);
-    insertAtTail(head,3);
-    insertAtTail(head2,4);
-    insertAtHead(head2,5);
-    insertAtHead(head2,7);
+    insertAtTail(head2,2);
+    insertAtTail(head2,3);
+    insertAtTail(head,4);
+    insertAtTail(head,5);
+    insertAtTail(head2,6);
+    insertAtTail(head,7);
     display(head);
     display(head2);
-    Node* newHead = merge(head,head2);
+    Node* newHead = mergeRec(head,head2);
+    // Node* newHead2 = merge(head,head2);
     display(newHead);
+    // display(newHead2);
 
     return 0;
 }
