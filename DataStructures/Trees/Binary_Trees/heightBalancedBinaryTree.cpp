@@ -22,6 +22,7 @@ int height(Node* node){
     return max(lh,rh)+1;
 }
 
+// Time complexity: O(N^2)
 bool isBalanced(Node* root){
     if(root == NULL){
         return true;
@@ -40,6 +41,27 @@ bool isBalanced(Node* root){
     return false;
 }
 
+// Time complexity O(N)
+bool isBalancedOptimised(Node* root, int *height){
+    int lh=0,rh = 0;
+    if(root == NULL){
+        return true;
+    }
+    if(!isBalancedOptimised(root->left, &lh)){
+        return false;
+    }
+    if(!isBalancedOptimised(root->right, &rh)){
+        return false;
+    }
+    *height = max(lh, rh) + 1;
+    if(abs(lh-rh)<=1){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 int main()
 {
     Node* root = new Node(1);
@@ -55,6 +77,13 @@ int main()
     }
     else{
         cout<<"Unbalanced"<<endl;
+    }
+    int height =0;
+    if(isBalancedOptimised(root, &height)){
+        cout<<"Optimised Balanced"<<endl;
+    }
+    else{
+        cout<<"Optimised Unbalanced"<<endl;
     }
 
     return 0;
