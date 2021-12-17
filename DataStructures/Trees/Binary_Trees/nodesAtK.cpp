@@ -36,14 +36,16 @@ int printNodesAtK(Node* root, Node* target, int k){
             printSubTreeNodes(root->right, k-dl-2);
         }
         return dl+1;
-        
-        int dr = printNodesAtK(root->right, target, k);
+    }
+
+    int dr = printNodesAtK(root->right, target, k);
+    if(dr!=-1){
         if(dr+1 == k){
             cout<<root->data<<" ";
         }
         else{
             printSubTreeNodes(root->left, k-dr-2);
-        }
+            }
         return dr+1;
     }
     return -1;

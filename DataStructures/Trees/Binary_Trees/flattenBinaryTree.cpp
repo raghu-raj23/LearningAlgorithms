@@ -15,6 +15,7 @@ class Node{
 
 void flatten(Node* root){
     if(root == NULL or (root->left == NULL or root->right == NULL)) return;
+    
     if(root-> left != NULL){
         flatten(root-> left);
 
