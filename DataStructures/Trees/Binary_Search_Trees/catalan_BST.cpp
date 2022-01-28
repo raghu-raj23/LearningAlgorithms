@@ -11,6 +11,8 @@ class Node{
     }
 };
 
+// the diferent bst interpretations for N number of nodes
+
 vector<Node*> catalan_BST(int start, int end){
     vector<Node*> trees;
     if(start > end){
